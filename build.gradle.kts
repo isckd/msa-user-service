@@ -43,7 +43,19 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	// h2 1.4.196 위의 버전부터는 Springboot 가 자동생성하지 않는다.
-	implementation("com.h2database:h2:1.4.196")
+	runtimeOnly("com.h2database:h2:1.4.196")
+
+	// jpa
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	// model mapper
+	implementation("org.modelmapper:modelmapper:2.4.4")
+
+	// validation
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	// security
+	implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 dependencyManagement {
