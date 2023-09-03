@@ -8,26 +8,31 @@ import com.example.userservice.vo.ResponseUser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-service")
 public class UserController {
 
     private Greeting greeting;
     private UserService userService;
 
+    private Environment env;
+
     @Autowired
-    public UserController(Greeting greeting, UserService userService) {
+    public UserController(Greeting greeting, UserService userService, Environment env) {
         this.greeting = greeting;
         this.userService = userService;
+        this.env = env;
     }
 
     @GetMapping("/health_check")
     public String check() {
-        return "It's Working in User Service";
+        return String.format("It's Working in User Service on PORT %s",
+                env.getProperty("local.server.port"));
     }
 
     @GetMapping("/welcome")
